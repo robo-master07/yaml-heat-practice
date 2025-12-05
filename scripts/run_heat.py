@@ -24,4 +24,4 @@ for n in fig_nums:
     plt.figure(n).savefig(out / f"figure_{n}.png", dpi=150, bbox_inches="tight")
 plt.close("all")
 
-print(f"[runner] figures saved to {out.resolve()}")
+print(f"[runner] figure saved to {out.resolve()}")

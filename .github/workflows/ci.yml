@@ -8,7 +8,7 @@ on:
 
 jobs:
   run-heat:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
@@ -24,13 +24,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run heat simulation
+      - name: Run PartA1 and save log
         run: |
-          python scripts/run_heat.py --file src/PartA1.py --out outputs
+          mkdir -p outputs/PartA1
+          python scripts/run_heat.py --file src/PartA1.py --out outputs/PartA1 | tee outputs/PartA1/output_log.txt
+
+      - name: Run PartA2 and save log
+        run: |
+          mkdir -p outputs/PartA2
+          python scripts/run_heat.py --file src/PartA2.py --out outputs/PartA2 | tee outputs/PartA2/output_log.txt
 
       - name: Upload results
         uses: actions/upload-artifact@v4
         with:
           name: heat-outputs
           path: outputs/
-
