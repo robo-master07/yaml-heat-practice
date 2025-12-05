@@ -28,14 +28,14 @@ jobs:
       - name: Run PartA1 and save log
         shell: cmd
         run: |
-          mkdir outputs\PartA1
-          python scripts\run_heat.py --file src\PartA1.py --out outputs\PartA1 2>&1 | tee outputs\PartA1\output_log.txt
+          if not exist outputs\PartA1 mkdir outputs\PartA1
+          python scripts\run_heat.py --file src\PartA1.py --out outputs\PartA1 1> outputs\PartA1\output_log.txt 2>&1
 
       - name: Run PartA2 and save log
         shell: cmd
         run: |
-          mkdir outputs\PartA2
-          python scripts\run_heat.py --file src\PartA2.py --out outputs\PartA2 2>&1 | tee outputs\PartA2\output_log.txt
+          if not exist outputs\PartA2 mkdir outputs\PartA2
+          python scripts\run_heat.py --file src\PartA2.py --out outputs\PartA2 1> outputs\PartA2\output_log.txt 2>&1
 
       - name: Upload results
         uses: actions/upload-artifact@v4
