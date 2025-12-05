@@ -26,13 +26,13 @@ jobs:
 
       - name: Run PartA1 and save log
         run: |
-          mkdir -p outputs/PartA1
-          python scripts/run_heat.py --file src/PartA1.py --out outputs/PartA1 | tee outputs/PartA1/output_log.txt
+          New-Item -ItemType Directory -Force -Path outputs/PartA1
+          python scripts/run_heat.py --file src/PartA1.py --out outputs/PartA1 *>&1 | Out-File -FilePath outputs/PartA1/output_log.txt
 
       - name: Run PartA2 and save log
         run: |
-          mkdir -p outputs/PartA2
-          python scripts/run_heat.py --file src/PartA2.py --out outputs/PartA2 | tee outputs/PartA2/output_log.txt
+          New-Item -ItemType Directory -Force -Path outputs/PartA2
+          python scripts/run_heat.py --file src/PartA2.py --out outputs/PartA2 *>&1 | Out-File -FilePath outputs/PartA2/output_log.txt
 
       - name: Upload results
         uses: actions/upload-artifact@v4
