@@ -26,13 +26,17 @@ jobs:
 
       - name: Run PartA1 and save log
         run: |
+          # Use standard PowerShell path creation
           New-Item -ItemType Directory -Force -Path outputs/PartA1
-          cmd /c "python scripts/run_heat.py --file src/PartA1.py --out outputs/PartA1 2>&1 | tee outputs/PartA1/output_log.txt"
-
+          
+          # Use PowerShell's &> redirection to capture both stdout and stderr
+          # This replaces the unreliable `cmd /c "..." | tee ...` command.
+          python scripts/run_heat.py --file src/PartA1.py --out outputs/PartA1 &> outputs/PartA1/output_log.txt
+          
       - name: Run PartA2 and save log
         run: |
           New-Item -ItemType Directory -Force -Path outputs/PartA2
-          cmd /c "python scripts/run_heat.py --file src/PartA2.py --out outputs/PartA2 2>&1 | tee outputs/PartA2/output_log.txt"
+          python scripts/run_heat.py --file src/PartA2.py --out outputs/PartA2 &> outputs/PartA2/output_log.txt
 
       - name: Upload results
         uses: actions/upload-artifact@v4
