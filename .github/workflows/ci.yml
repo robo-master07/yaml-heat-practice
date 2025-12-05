@@ -1,5 +1,5 @@
 name: Heat Simulation CI
-
+shell: cmd
 on:
   push:
     branches: [ main ]
